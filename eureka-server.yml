@@ -22,3 +22,9 @@ eureka:
     fetch-registry: false           # the registry itself does NOT fetch from another registry
   server:
     enable-self-preservation: true  # default on; profile files can override
+
+management: # this is used across all the profiles
+  endpoints:
+    web:
+      exposure:
+        include: health, env, refresh
