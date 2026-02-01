@@ -1,0 +1,46 @@
+# ─────────────────────────────────────────────────────────
+# config-repo/api-gateway.yml
+#
+# Shared across ALL profiles.  Defines routes and Eureka
+# auto-discovery that both dev and prod use.
+#
+# Merge order (last wins):
+#   application.yml  →  api-gateway.yml  →  api-gateway-{profile}.yml
+# ─────────────────────────────────────────────────────────
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      # Auto-create a route for every service registered in Eureka.
+      # Service name becomes the path prefix automatically.
+      # e.g. a service named "order-service" is reachable at
+      #      http://localhost:8080/order-service/**
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true   # Eureka registers names in UPPER-CASE; this normalises them
+
+      routes:
+        # ─── Eureka dashboard passthrough ────────────────────
+        - id: eureka-dashboard
+          uri: http://localhost:8761
+          predicates:
+            - Path=/eureka/**
+
+        # ─── Future microservice routes ──────────────────────
+        # Uncomment and adapt when you add new services.
+        # The lb:// scheme tells Gateway to resolve the URI
+        # via Eureka instead of hitting a hard-coded host.
+        #
+        # - id: order-service
+        #   uri: lb://order-service
+        #   predicates:
+        #     - Path=/api/orders/**
+        #   filters:
+        #     - StripPrefix=2            # strips /api/orders before forwarding
+
+server:
+  port: 8080

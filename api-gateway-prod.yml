@@ -1,0 +1,26 @@
+# ─────────────────────────────────────────────────────────
+# config-repo/api-gateway-prod.yml
+#
+# Activated when profile = prod.
+# ─────────────────────────────────────────────────────────
+
+spring:
+  cloud:
+    gateway:
+      # Rate-limiter backed by Redis.
+      # Uncomment once you have a Redis instance and add
+      # spring-cloud-starter-gateway-rate-limiter to the pom.
+      #
+      # default-filters:
+      #   - name: RequestRateLimiter
+      #     args:
+      #       redis-rate-limiter:
+      #         replenishRate: 10      # tokens per second
+      #         burstCapacity: 20      # max burst
+      #       key-resolver: "#{@pathKeyResolver}"
+      pass: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: WARN
+    io.netty: WARN

@@ -1,0 +1,31 @@
+# ─────────────────────────────────────────────────────────
+# config-repo/api-gateway-dev.yml
+#
+# Activated when profile = dev.
+# Overrides api-gateway.yml for local development only.
+# ─────────────────────────────────────────────────────────
+
+spring:
+  cloud:
+    gateway:
+      # CORS wide open so a local React/Vue dev-server
+      # (typically on port 3000) can hit the gateway without
+      # being blocked by the browser.
+      cors:
+        enabled: true
+        configs:
+          "[/**]":
+            allowed-origins:
+              - "http://localhost:3000"
+            allowed-methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowed-headers:
+              - "*"
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    io.netty: DEBUG
