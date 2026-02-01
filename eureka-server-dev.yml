@@ -1,0 +1,17 @@
+# ─────────────────────────────────────────────────────────
+# config-repo/eureka-server-dev.yml
+#
+# Activated when the client requests profile = dev.
+# Overrides anything in eureka-server.yml for dev only.
+# ─────────────────────────────────────────────────────────
+
+eureka:
+  server:
+    # Dev: turn off self-preservation so stale registrations
+    # don't linger when you restart services during development.
+    enable-self-preservation: false
+
+logging:
+  level:
+    com.netflix.eureka: DEBUG
+    com.netflix.discovery: DEBUG

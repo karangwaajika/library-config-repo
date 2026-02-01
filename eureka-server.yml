@@ -1,0 +1,24 @@
+# ─────────────────────────────────────────────────────────
+# config-repo/eureka-server.yml
+#
+# Shared across ALL profiles.  Config Server merges this
+# with the active profile file (dev or prod) before sending
+# it to the Eureka Server client.
+#
+# Merge order (last wins):
+#   application.yml  →  eureka-server.yml  →  eureka-server-{profile}.yml
+# ─────────────────────────────────────────────────────────
+
+spring:
+  application:
+    name: eureka-server
+
+server:
+  port: 8761                        # standard Eureka registry port
+
+eureka:
+  client:
+    register-with-eureka: false     # the registry itself must NOT register as a client
+    fetch-registry: false           # the registry itself does NOT fetch from another registry
+  server:
+    enable-self-preservation: true  # default on; profile files can override

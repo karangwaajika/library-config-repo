@@ -1,0 +1,17 @@
+# ─────────────────────────────────────────────────────────
+# config-repo/eureka-server-prod.yml
+#
+# Activated when the client requests profile = prod.
+# ─────────────────────────────────────────────────────────
+
+eureka:
+  server:
+    # Prod: keep self-preservation ON so the registry holds
+    # onto registrations during network partitions instead of
+    # evicting everything.
+    enable-self-preservation: true
+
+logging:
+  level:
+    com.netflix.eureka: WARN
+    com.netflix.discovery: WARN
