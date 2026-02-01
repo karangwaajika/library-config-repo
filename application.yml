@@ -1,0 +1,18 @@
+# ─────────────────────────────────────────────────────────
+# config-repo/application.yml
+#
+# Shared defaults served to EVERY client that connects to
+# Config Server.  Profile-specific and service-specific files
+# override anything defined here.
+# ─────────────────────────────────────────────────────────
+
+# Default Eureka registry location (all clients inherit this)
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
